@@ -3,8 +3,9 @@
 
   tasks:
     - name: Ensure repo is present and updated
-      dest: "~"
-      repo: https://github.com/tjfranks02/personal-website.git
+      git:
+        dest: "~"
+        repo: https://github.com/tjfranks02/personal-website.git
 
     - name: Update and upgrade apt packages
       apt:
