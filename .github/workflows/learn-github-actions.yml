@@ -13,8 +13,8 @@ jobs:
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: pull_and_deploy_image.yml
-          directory: ./deploy
+          playbook: deploy.yml
+          directory: ./.github
           # Optional, SSH private key
           key: ${{ secrets.ANSIBLE_SSH_PRIVATE_KEY }}
           # Optional, additional flags to pass to ansible-playbook
