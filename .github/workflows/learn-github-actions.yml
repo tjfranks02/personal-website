@@ -1,0 +1,19 @@
+name: Push changes to Digital Ocean Droplet
+
+on: [push]
+
+jobs:
+  deploy_changes:
+    name: Deploy new code changes to personal website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: pull_and_deploy_image.yml
+          directory: .github
+          # Optional, SSH private key
+          key: ${{ secrets.ANSIBLE_SSH_PRIVATE_KEY }}
+          # Optional, additional flags to pass to ansible-playbook
+          options: |
+            --inventory ./hosts

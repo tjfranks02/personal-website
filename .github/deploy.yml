@@ -1,0 +1,33 @@
+- name: Deploy new changes to server hosting personal website
+  hosts: all
+
+  tasks:
+    - name: Ensure repo is present and updated
+      dest: "~"
+      repo: https://github.com/tjfranks02/personal-website.git
+
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+      become: true
+
+    - name: Ensure nginx is installed
+      apt:
+        name: nginx
+        state: present
+
+    - name: Allow Nginx
+      shell: ufw allow 'Nginx HTTP'
+      become: true
+
+    - name: Ensure Nginx config file is present
+      copy:
+        src: ./ui.conf
+        dest: /etc/nginx/conf.d/ui.conf
+
+    - name: Restart nginx
+      systemd_service:
+        state: restarted
+        daemon_reload: true
+        name: nginx
