@@ -16,8 +16,7 @@ jobs:
           playbook: deploy.yml
           directory: ./.github
           # Optional, SSH private key
-          key: ${{ secrets.ANSIBLE_SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           # Optional, additional flags to pass to ansible-playbook
           options: |
             --inventory ./hosts
-            -vvvv
